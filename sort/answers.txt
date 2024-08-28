@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: Bubble Sort has the fastest Best-Case Omega notation with O(n) with an Array that has already been sorted. This one had the fastest time.
+
+sort2 uses: Merge Sort
+
+How do you know?: Out of the 3, Merge Sort is fastest with O(n log n), so I used the random50000.txt as a measure to test which would take the longest.
+
+sort3 uses: Selection Sort
+
+How do you know?: Process of elimination.
