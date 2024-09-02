@@ -160,27 +160,73 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    // calculating the number of votes needed to win
+    int votes_needed_to_win = (voter_count / 2);
+
+    for (int i = 0; i < candidate_count; i++) {
+        if (candidates[i].votes > votes_needed_to_win) {
+            printf("%s\n", candidates[i].name);
+            return true;
+        }
+    }
+
     return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    // Setting a big number to start narrowing down who has the lowest number of votes
+    int lowest_votes = 100;
+
+    // Keep track of the index of the candidate with the lowest number of votes
+    int candidate_index;
+
+    // for each candidate in the number of candidates
+    for (int i = 0; i < candidate_count; i++) {
+        // candidate is not eliminated
+        if (!candidates[i].eliminated) {
+            if (candidates[i].votes < lowest_votes) {
+                lowest_votes = candidates[i].votes;
+                candidate_index = i;
+            }
+        }
+    }
+
+    // returning the lowest number of votes
+    return lowest_votes;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    return false;
+    // for each candidate
+    for (int i = 0; i < candidate_count; i++) {
+        // if the candidate is not eliminated
+        if (!candidates[i].eliminated) {
+            // if any of the candidates's votes don't match the min, then it is not a tie
+            if (candidates[i].votes != min) {
+                return false;
+            }
+        }
+    }
+
+    // If false isn't returned, then return true because there is a tie
+    return true;
 }
 
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
-    return;
+    // Looping through each candidate
+    for (int i = 0; i < candidate_count; i++) {
+        // If the candidate is still in the race
+        if (!candidates[i].eliminated) {
+            // Check if the candidate has the lowest number of votes
+            if (candidates[i].votes == min) {
+                // Eliminate the candidate
+                candidates[i].eliminated = true;
+            }
+        }
+    }
 }
